@@ -38,10 +38,7 @@ public abstract class Funcionario {
     private StatusFuncionario status;
 
     @Column(nullable = false, unique = true)
-    private String nomeUsuario;
-
-    @Column(nullable = false)
-    private String senhaUsuario;
+    private String login;
 
     // Construtor vazio
     public Funcionario() {
@@ -56,7 +53,7 @@ public abstract class Funcionario {
     }
 
     // Construtor completo
-    public Funcionario(UUID id, String nome, String cpf, LocalDate dataNascimento, Sexo sexo, String telefone, String email, TipoSanguineo tipoSanguineo, StatusFuncionario status, String nomeUsuario, String senhaUsuario) {
+    public Funcionario(UUID id, String nome, String cpf, LocalDate dataNascimento, Sexo sexo, String telefone, String email, TipoSanguineo tipoSanguineo, StatusFuncionario status, String login) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -66,8 +63,7 @@ public abstract class Funcionario {
         this.email = email;
         this.tipoSanguineo = tipoSanguineo;
         this.status = status;
-        this.nomeUsuario = nomeUsuario;
-        this.senhaUsuario = senhaUsuario;
+        this.login = login;
     }
 
     // Getters e Setters
@@ -144,21 +140,15 @@ public abstract class Funcionario {
         this.status = status;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getSenhaUsuario() {
-        return senhaUsuario;
-    }
 
-    public void setSenhaUsuario(String senhaUsuario) {
-        this.senhaUsuario = senhaUsuario;
-    }
 
     // Enum
     public enum StatusFuncionario {
