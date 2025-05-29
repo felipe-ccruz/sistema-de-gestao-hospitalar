@@ -1,6 +1,7 @@
 package com.cesupa.sistemadegestaohospitalar;
 
 
+import com.cesupa.sistemadegestaohospitalar.ui.TelaInicial;
 import com.cesupa.sistemadegestaohospitalar.ui.TelaLogin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,15 +15,12 @@ public class SistemaDeGestaoHospitalarApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SistemaDeGestaoHospitalarApplication.class);
-        app.setWebApplicationType(WebApplicationType.NONE); // sem web server
         app.run(args);
     }
 
     @Override
     public void run(String... args) {
-        SwingUtilities.invokeLater(() -> {
-            TelaLogin tela = new TelaLogin();
-            tela.setVisible(true);
-        });
+        TelaInicial telaInicial = new TelaInicial();
+        telaInicial.exibirTelaInicial();
     }
 }

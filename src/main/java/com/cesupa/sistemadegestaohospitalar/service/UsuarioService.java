@@ -1,5 +1,10 @@
 package com.cesupa.sistemadegestaohospitalar.service;
 
-public class UsuarioService {
+import org.springframework.stereotype.Service;
 
+@Service
+public class UsuarioService {
+    public boolean LoginUsuario(String email, String senha) {
+        return true;
+    }
 }
