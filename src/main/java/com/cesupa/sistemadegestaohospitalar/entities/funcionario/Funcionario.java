@@ -1,5 +1,6 @@
 package com.cesupa.sistemadegestaohospitalar.entities.funcionario;
 
+import com.cesupa.sistemadegestaohospitalar.entities.Usuario;
 import com.cesupa.sistemadegestaohospitalar.entities.enums.Sexo;
 import com.cesupa.sistemadegestaohospitalar.entities.enums.TipoSanguineo;
 import jakarta.persistence.*;
@@ -37,19 +38,21 @@ public abstract class Funcionario {
     @Enumerated(EnumType.STRING)
     private StatusFuncionario status;
 
-    @Column(nullable = false, unique = true)
-    private String login;
+    @OneToOne
+    @JoinColumn(name = "login", referencedColumnName = "login", nullable = false, unique = true)
+    private Usuario usuario;
 
     // Construtor vazio
     public Funcionario() {
     }
 
     // Construtor com campos básicos
-    public Funcionario(String nome, String cpf, LocalDate dataNascimento, Sexo sexo) {
+    public Funcionario(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, Usuario usuario) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
+        this.usuario = usuario;
     }
 
     // Construtor completo
@@ -63,7 +66,6 @@ public abstract class Funcionario {
         this.email = email;
         this.tipoSanguineo = tipoSanguineo;
         this.status = status;
-        this.login = login;
     }
 
     // Getters e Setters
@@ -140,13 +142,14 @@ public abstract class Funcionario {
         this.status = status;
     }
 
-    public String getLogin() {
-        return login;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+
 
 
 

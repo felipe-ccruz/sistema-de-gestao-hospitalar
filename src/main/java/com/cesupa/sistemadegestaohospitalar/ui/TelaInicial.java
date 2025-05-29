@@ -10,12 +10,6 @@ public class TelaInicial {
         exibirLogoGrande();
         sc.nextLine();
 
-        //LOGIN
-        TelaLogin telaLogin = new TelaLogin();
-        telaLogin.preencherInformacoes();
-
-
-
         sc.close();
     }
 

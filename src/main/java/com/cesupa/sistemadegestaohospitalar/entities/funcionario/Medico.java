@@ -1,5 +1,6 @@
 package com.cesupa.sistemadegestaohospitalar.entities.funcionario;
 
+import com.cesupa.sistemadegestaohospitalar.entities.Usuario;
 import com.cesupa.sistemadegestaohospitalar.entities.enums.Sexo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,8 +22,8 @@ public class Medico extends Funcionario {
     }
 
     // Construtor com campos da superclasse e os próprios
-    public Medico(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, String crm, String especialidade) {
-        super(nome, cpf, dataNascimento, sexo);
+    public Medico(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, Usuario usuario, String crm, String especialidade) {
+        super(nome, cpf, dataNascimento, sexo, usuario); // Agora recebe um objeto Usuario
         this.crm = crm;
         this.especialidade = especialidade;
     }
