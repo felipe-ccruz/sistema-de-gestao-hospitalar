@@ -1,14 +1,16 @@
 package com.cesupa.sistemadegestaohospitalar.service;
 
-import com.cesupa.sistemadegestaohospitalar.entities.Paciente;
-import com.cesupa.sistemadegestaohospitalar.repositories.ConsultaRepository;
-import com.cesupa.sistemadegestaohospitalar.repositories.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cesupa.sistemadegestaohospitalar.entities.Paciente;
+import com.cesupa.sistemadegestaohospitalar.repositories.ConsultaRepository;
+import com.cesupa.sistemadegestaohospitalar.repositories.PacienteRepository;
 
 @Service
 @Transactional
