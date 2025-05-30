@@ -1,17 +1,14 @@
 package com.cesupa.sistemadegestaohospitalar.entities;
 
-import com.cesupa.sistemadegestaohospitalar.entities.Paciente;
-import com.cesupa.sistemadegestaohospitalar.entities.funcionario.Medico;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "consulta")
 public class Consulta {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
@@ -22,84 +19,42 @@ public class Consulta {
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
-    @Column(nullable = false)
+    @Column(name = "data_marcacao", nullable = false)
     private LocalDateTime dataMarcacao;
 
-    @Column(nullable = false)
+    @Column(name = "data_consulta", nullable = false)
     private LocalDateTime dataConsulta;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatusConsulta status;
+    @Column(nullable = false, length = 20)
+    private String status = "AGENDADA";
 
-    // Construtor padrão
-    public Consulta() {
-    }
+    // Constructors
+    public Consulta() {}
 
-    // Construtor completo
-    public Consulta(UUID id, Paciente paciente, Medico medico, LocalDateTime dataMarcacao, LocalDateTime dataConsulta, StatusConsulta status) {
-        this.id = id;
+    public Consulta(Paciente paciente, Medico medico, LocalDateTime dataConsulta) {
         this.paciente = paciente;
         this.medico = medico;
-        this.dataMarcacao = dataMarcacao;
         this.dataConsulta = dataConsulta;
-        this.status = status;
+        this.dataMarcacao = LocalDateTime.now();
+        this.status = "AGENDADA";
     }
 
-    // Getters e Setters
+    // Getters and Setters
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    public UUID getId() {
-        return id;
-    }
+    public Paciente getPaciente() { return paciente; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public Medico getMedico() { return medico; }
+    public void setMedico(Medico medico) { this.medico = medico; }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
+    public LocalDateTime getDataMarcacao() { return dataMarcacao; }
+    public void setDataMarcacao(LocalDateTime dataMarcacao) { this.dataMarcacao = dataMarcacao; }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
+    public LocalDateTime getDataConsulta() { return dataConsulta; }
+    public void setDataConsulta(LocalDateTime dataConsulta) { this.dataConsulta = dataConsulta; }
 
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public LocalDateTime getDataMarcacao() {
-        return dataMarcacao;
-    }
-
-    public void setDataMarcacao(LocalDateTime dataMarcacao) {
-        this.dataMarcacao = dataMarcacao;
-    }
-
-    public LocalDateTime getDataConsulta() {
-        return dataConsulta;
-    }
-
-    public void setDataConsulta(LocalDateTime dataConsulta) {
-        this.dataConsulta = dataConsulta;
-    }
-
-    public StatusConsulta getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusConsulta status) {
-        this.status = status;
-    }
-
-    // Enum para status da consulta
-    public enum StatusConsulta {
-        AGENDADA,
-        CANCELADA,
-        REALIZADA
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

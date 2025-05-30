@@ -5,14 +5,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "paciente")
-public class Paciente {
+@Table(name = "recepcionista")
+public class Recepcionista {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
-    private String nome;
+    @Column(name = "nome_e_sobrenome", nullable = false)
+    private String nomeESobrenome;
 
     @Column(nullable = false, unique = true)
     private String cpf;
@@ -20,42 +20,45 @@ public class Paciente {
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String sexo;
 
     private String telefone;
-    private String endereco;
     private String email;
 
-    @Column(name = "tipo_sanguineo", length = 20)
+    @Column(name = "tipo_sanguineo")
     private String tipoSanguineo;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String status = "ATIVO";
 
-    @Column(name = "justifica_status")
-    private String justificaStatus;
+    @OneToOne
+    @JoinColumn(name = "usuario_id", nullable = false, unique = true)
+    private Usuario usuario;
+
+    @Column(nullable = false)
+    private String turno;
 
     // Constructors
-    public Paciente() {}
+    public Recepcionista() {}
 
-    public Paciente(String nome, String cpf, LocalDate dataNascimento, String sexo,
-                    String telefone, String endereco) {
-        this.nome = nome;
+    public Recepcionista(String nomeESobrenome, String cpf, LocalDate dataNascimento,
+                         String sexo, String turno, Usuario usuario) {
+        this.nomeESobrenome = nomeESobrenome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
-        this.telefone = telefone;
-        this.endereco = endereco;
+        this.turno = turno;
+        this.usuario = usuario;
         this.status = "ATIVO";
     }
 
-    // Getters and Setters
+    // Getters and Setters (similar pattern as above)
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public String getNomeESobrenome() { return nomeESobrenome; }
+    public void setNomeESobrenome(String nomeESobrenome) { this.nomeESobrenome = nomeESobrenome; }
 
     public String getCpf() { return cpf; }
     public void setCpf(String cpf) { this.cpf = cpf; }
@@ -69,9 +72,6 @@ public class Paciente {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    public String getEndereco() { return endereco; }
-    public void setEndereco(String endereco) { this.endereco = endereco; }
-
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
@@ -81,7 +81,10 @@ public class Paciente {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public String getJustificaStatus() { return justificaStatus; }
-    public void setJustificaStatus(String justificaStatus) { this.justificaStatus = justificaStatus; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+    public String getTurno() { return turno; }
+    public void setTurno(String turno) { this.turno = turno; }
 }
 
