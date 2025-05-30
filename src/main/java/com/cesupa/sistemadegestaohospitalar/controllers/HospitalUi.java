@@ -306,7 +306,27 @@ public class HospitalUi implements CommandLineRunner {
             }
 
             System.out.print("Sexo (" + paciente.getSexo() + "): ");
-            String sexo = scanner.nextLine();
+            System.out.println("\nSelecione o sexo:");
+            System.out.println("1. MASCULINO");
+            System.out.println("2. FEMININO");
+            System.out.println("3. OUTRO");
+            System.out.print("Escolha uma opção (1-3): ");
+
+            int opcaoSexo = Integer.parseInt(scanner.nextLine());
+            String sexo;
+            switch (opcaoSexo) {
+                case 1:
+                    sexo = "MASCULINO";
+                    break;
+                case 2:
+                    sexo = "FEMININO";
+                    break;
+                case 3:
+                    sexo = "OUTRO";
+                    break;
+                default:
+                    throw new IllegalArgumentException("Opção inválida para sexo");
+            }
             if (!sexo.trim().isEmpty()) {
                 paciente.setSexo(sexo);
             }
@@ -330,9 +350,57 @@ public class HospitalUi implements CommandLineRunner {
             }
 
             System.out.print("Tipo sanguíneo (" + (paciente.getTipoSanguineo() != null ? paciente.getTipoSanguineo() : "Não informado") + "): ");
-            String tipoSanguineo = scanner.nextLine();
-            if (!tipoSanguineo.trim().isEmpty()) {
-                paciente.setTipoSanguineo(tipoSanguineo);
+            System.out.println("\nTipo sanguíneo (opcional):");
+            System.out.println("0. Pular (não informar)");
+            System.out.println("1. A+");
+            System.out.println("2. A-");
+            System.out.println("3. B+");
+            System.out.println("4. B-");
+            System.out.println("5. AB+");
+            System.out.println("6. AB-");
+            System.out.println("7. O+");
+            System.out.println("8. O-");
+            System.out.print("Escolha uma opção (0-8): ");
+
+            String inputTipoSanguineo = scanner.nextLine();
+            if (!inputTipoSanguineo.trim().isEmpty()) {
+                int opcaoTipo = Integer.parseInt(inputTipoSanguineo);
+                String tipoSanguineo;
+                switch (opcaoTipo) {
+                    case 0:
+                        tipoSanguineo = null;
+                        break;
+                    case 1:
+                        tipoSanguineo = "A_POSITIVO";
+                        break;
+                    case 2:
+                        tipoSanguineo = "A_NEGATIVO";
+                        break;
+                    case 3:
+                        tipoSanguineo = "B_POSITIVO";
+                        break;
+                    case 4:
+                        tipoSanguineo = "B_NEGATIVO";
+                        break;
+                    case 5:
+                        tipoSanguineo = "AB_POSITIVO";
+                        break;
+                    case 6:
+                        tipoSanguineo = "AB_NEGATIVO";
+                        break;
+                    case 7:
+                        tipoSanguineo = "O_POSITIVO";
+                        break;
+                    case 8:
+                        tipoSanguineo = "O_NEGATIVO";
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Opção inválida para tipo sanguíneo");
+                }
+
+                if (tipoSanguineo != null) {
+                    paciente.setTipoSanguineo(tipoSanguineo);
+                }
             }
 
             Paciente pacienteAtualizado = pacienteController.atualizarDadosPaciente(paciente);
