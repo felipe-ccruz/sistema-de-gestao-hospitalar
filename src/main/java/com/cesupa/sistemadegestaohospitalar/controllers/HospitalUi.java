@@ -8,6 +8,7 @@ import com.cesupa.sistemadegestaohospitalar.entities.Paciente;
 import com.cesupa.sistemadegestaohospitalar.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 @Component
+@Profile("!test")
 public class HospitalUi implements CommandLineRunner {
 
     @Autowired

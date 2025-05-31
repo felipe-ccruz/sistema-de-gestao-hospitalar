@@ -7,5 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SistemaDeGestaoHospitalarApplication {
     public static void main(String[] args) {
         SpringApplication.run(SistemaDeGestaoHospitalarApplication.class, args);
+
+
+
+
+
+
     }
 }
